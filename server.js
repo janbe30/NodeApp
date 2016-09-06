@@ -20,3 +20,18 @@ app.get('/todo', function(req, res){ //function to do something with request
     res.end(data) //Tells end-point that it's done and sends data back to user
   });
 })
+
+app.post('/todo', function(req, res){
+  var newTodo = req.body //Send data in body of req
+  var newId = String(newTodo.id); //Var with object in DB's ID
+  newTodo["created_at"] = new Date();
+  fs.readFile(__dirname + "/" + "todo.json", "utf8", function(err,data){
+    data = JSON.parse(data);
+    data[newId] = newTodo;
+    fs.writeFile(__dirname + "/" + "todo.json", JSON.stringify(data, null, '\t'), "utf8", function(error){ //Write data to file
+      if (error) throw error; //Log error in console
+      console.log("Saved!");
+      res.end(JSON.stringify(data, null, '\t')); //Pass data back to user
+    })
+  })
+})
