@@ -13,7 +13,9 @@ var server = app.listen(8081, function() {
 })
 
 // GET, POST, PUT/PATCH, DELETE - Basic API commands
+
 //localhost:8081/todo
+//Retrieve entire database
 app.get('/todo', function(req, res){ //function to do something with request
   fs.readFile(__dirname + "/" + "todo.json", "utf8", function(err,data){ //function reads todo.json file
     console.log(data)
@@ -21,6 +23,7 @@ app.get('/todo', function(req, res){ //function to do something with request
   });
 })
 
+//Add new item to db
 app.post('/todo', function(req, res){
   var newTodo = req.body //Send data in body of req
   var newId = String(newTodo.id); //Var with object in DB's ID
@@ -32,6 +35,43 @@ app.post('/todo', function(req, res){
       if (error) throw error; //Log error in console
       console.log("Saved!");
       res.end(JSON.stringify(data, null, '\t')); //Pass data back to user
+    })
+  })
+})
+
+//Retrieve only one item from database using ID
+// localhost:8081/todo/[:id]
+app.get('/todo/:id', function(req, res){
+  fs.readFile(__dirname + "/" + "todo.json", "utf8", function(err,data){
+    todos = JSON.parse(data);
+    var todo = todos[String(req.params.id)]//turn id to String and save in var
+    console.log(todo);
+    res.end(JSON.stringify(todo, null, '\t'));
+  })
+})
+
+//Update single item : {title, newtitle}
+app.put('/todo/:id', function(req, res){
+  fs.readFile(__dirname + "/" + "todo.json", "utf8", function(err, data){
+    todos = JSON.parse(data); //Parsed data saved to todos
+    todos[String(req.params.id)] = Object.assign(todos[String(req.params.id)], req.body); //Update todo with id using object.assign with req.body
+    fs.writeFile(__dirname + "/" + "todo.json", JSON.stringify(todos, null, '\t'), "utf8", function(error) {
+      if(error) throw error;
+      console.log("Updated!");
+      res.end(JSON.stringify(todos, null, '\t'));
+    })
+  })
+})
+
+//Delete item
+app.delete('/todo/:id', function(req, res){
+  fs.readFile(__dirname + "/" + "todo.json", "utf8", function(err, data) {
+    data = JSON.parse(data);
+    delete data[String(req.params.id)]; //Delete single id
+    fs.writeFile(__dirname + "/" + "todo.json", JSON.stringify(data, null, '\t'), "utf8", function(error){
+      if(error) throw error;
+      console.log('Deleted', data);
+      res.end(JSON.stringify(data,null, '\t')); //Return to user
     })
   })
 })

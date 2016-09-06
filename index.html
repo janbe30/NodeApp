@@ -8,7 +8,7 @@
           $.each(data, function(i, f){
             $("<p>" + f.id + "</p>").appendTo("#todos #ids");
             $("<p>" + f.title + "</p>").appendTo("#todos #titles");
-            $("<p>" + f.description + "</p>").appendTo("todos #descriptions");
+            $("<p>" + f.description + "</p>").appendTo("#todos #descriptions");
             $("<p>" + f.completed + "</p>").appendTo("#todos #completeds");
           });
         });
@@ -17,7 +17,7 @@
     <style>
       #todos {
         width: 100%;
-        height: calc(100vh-20px);
+        height: calc(100vh - 20px);
         display: flex;
         flex-direction: row;
         align-items: top;
@@ -59,3 +59,4 @@
     </div>
 
   </body>
+</html>
