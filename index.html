@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script>
+      $(function(){
+        $.getJSON('/home/janbe30/Documents/learnJS/node-app/todo.json', function(data){
+          $.each(data, function(i, f){
+            $("<p>" + f.id + "</p>").appendTo("#todos #ids");
+            $("<p>" + f.title + "</p>").appendTo("#todos #titles");
+            $("<p>" + f.description + "</p>").appendTo("todos #descriptions");
+            $("<p>" + f.completed + "</p>").appendTo("#todos #completeds");
+          });
+        });
+      });
+    </script>
+    <style>
+      #todos {
+        width: 100%;
+        height: calc(100vh-20px);
+        display: flex;
+        flex-direction: row;
+        align-items: top;
+        justify-content: space-around;
+      }
+
+      #ids, #titles, #descriptions, #completeds {
+        text-align: center;
+        border: 1px solid black;
+        height: 100%;
+      }
+
+      #ids { width: 10%; }
+
+      #titles { width: 30%; }
+
+      #descriptions { width: 50%; }
+
+      #completeds { width: 10%; }
+
+    </style>
+  </head>
+  <body>
+    <div class="todoWrapper">
+      <div id="todos">
+        <div id="ids">
+          <h2>ID</h2>
+        </div>
+        <div id="titles">
+          <h2>Title</h2>
+        </div>
+        <div id="descriptions">
+          <h2>Description</h2>
+        </div>
+        <div id="completeds">
+          <h2>Completed</h2>
+        </div>
+      </div>
+    </div>
+
+  </body>
