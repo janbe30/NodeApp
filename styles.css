@@ -64,6 +64,14 @@ h2 {
   margin: 0 0.75em;
 }
 
+/*
+#todos p::before {
+  content: "EDIT ";
+  padding: 1em;
+  font-size: 0.75em;
+  color:  rgba(236, 100, 75, 0.9);
+}*/
+
 #ids, #titles, #descriptions, #completeds {
   text-align: center;
   height: 100%;
