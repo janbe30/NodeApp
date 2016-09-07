@@ -1,24 +1,81 @@
 @charset "utf-8";
 
-#todos {
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+
+.container {
   width: 100%;
-  height: calc(100vh - 20px);
+}
+
+
+header {
+  background-color: rgba(236, 100, 75, 0.9);
+  padding: 1em;
+  margin: -1em;
+}
+
+h1 {
+  font-size: 3em;
+  font-family: 'Baloo Paaji', cursive;
+  color: #111;
+  text-align: center;
+  padding: 1em;
+  margin-top: 2rem;
+}
+
+
+.intro {
+  text-align: center;
+  margin-top: -3em;
+  padding-bottom: 3em;
+  font-size: 1.3em;
+}
+
+
+.todoWrapper {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5em;
+  padding: 1em;
+}
+
+h2 {
+  background-color: rgb(189, 195, 199);
+  padding: 1em;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+#todos {
+  height: calc(100vh - 30px);
+  border: 1px solid rgb(189, 195, 199);
   display: flex;
   flex-direction: row;
   align-items: top;
   justify-content: space-around;
 }
 
-#ids, #titles, #descriptions, #completeds {
-  text-align: center;
-  border: 1px solid black;
-  height: 100%;
+#todos p {
+  border-bottom: 1px solid rgb(162, 222, 208);
+  padding: 1em;
+  margin: 0 0.75em;
 }
 
-#ids { width: 10%; }
+#ids, #titles, #descriptions, #completeds {
+  text-align: center;
+  height: 100%;
+
+}
+
+#ids {
+  display: none;
+}
 
 #titles { width: 30%; }
 
 #descriptions { width: 50%; }
 
-#completeds { width: 10%; }
+#completeds { width: 20%; }

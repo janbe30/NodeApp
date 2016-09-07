@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script>
-      $(function(){
-        $.getJSON('/home/janbe30/Documents/learnJS/node-app/todo.json', function(data){
-          $.each(data, function(i, f){
-            $("<p>" + f.id + "</p>").appendTo("#todos #ids");
-            $("<p>" + f.title + "</p>").appendTo("#todos #titles");
-            $("<p>" + f.description + "</p>").appendTo("#todos #descriptions");
-            $("<p>" + f.completed + "</p>").appendTo("#todos #completeds");
-          });
-        });
-      });
-    </script>
+    <!-- Basic Page needs -->
+    <title>To.Do.</title>
+    <meta name="description" content="Web application with interactive to-do list">
+    <meta name="author" content="Janeth Betancourt">
+    <!-- Mobile-specific -->
+    <meta name="viewport" content="width=device-width, inital-scale=1">
     <!--- CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji|Lato:300" rel="stylesheet">
+    <!-- JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
+
   <body>
-    <div class="todoWrapper">
-      <div id="todos">
-        <div id="ids">
-          <h2>ID</h2>
-        </div>
-        <div id="titles">
-          <h2>Title</h2>
-        </div>
-        <div id="descriptions">
-          <h2>Description</h2>
-        </div>
-        <div id="completeds">
-          <h2>Completed</h2>
+    <div class="container">
+      <header>
+        <h1>To.Do.</h1>
+        <p class="intro">Create simple to-do lists. Get started now. </p>
+      </header>
+      <div class="todoWrapper">
+        <div id="todos">
+          <div id="ids">
+            <h2>ID</h2>
+          </div>
+          <div id="titles">
+            <h2>Title</h2>
+          </div>
+          <div id="descriptions">
+            <h2>Description</h2>
+          </div>
+          <div id="completeds">
+            <h2>Completed</h2>
+          </div>
         </div>
       </div>
     </div>
+
+    <script src="scripts.js"></script>
 
   </body>
 </html>
