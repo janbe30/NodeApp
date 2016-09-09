@@ -25,6 +25,7 @@ app.get('/todo', function(req, res){ //function to do something with request
 
 //Add new item to db
 app.post('/todo', function(req, res){
+  console.log("POST request")
   var newTodo = req.body //Send data in body of req
   var newId = String(newTodo.id); //Var with object in DB's ID
   newTodo["created_at"] = new Date();

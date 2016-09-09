@@ -81,7 +81,25 @@ h2 {
 
 .btn-orange {
   background-color: rgba(236, 100, 75, 0.7);
-  
+  padding: 1em 4em;
+  border: 1px solid rgb(236, 100, 75);
+  border-radius: 0.5em;
+  color: #fff;
+  margin: 5em 14em;
+  -webkit-transition: background-color 1s ease-out, border-right: 2s, border-bottom 2s; /*  Older Android browser, chrome, mobile safari, safari & blackberry */
+  -moz-transition: background-color 1s ease-out border-right: 2s, border-bottom 2s; /* Firefox 4 to 15 */
+  -o-transition: background-color 1s ease-out border-right: 2s, border-bottom 2s; /* Opera */
+  transition: background-color 1s ease-out border-right: 2s, border-bottom 2s;
+}
+
+.btn-orange:hover {
+  background-color: rgb(236, 100, 75);
+}
+
+.btn-orange:active{
+  background-color: rgba(236, 100, 75, 0.7);
+  border-right: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
 }
 
 #todos {
@@ -144,15 +162,43 @@ h2 {
   position: absolute;
   width: 60%;
   height: 70%;
-  top: 15%;
+  top: 20%;
   left: 20%;
   font-size: 1.25em;
   align-items: center;
   justify-content: center;
+  display: none;
 }
+
+#newTodo h2 {
+  text-align: center;
+  padding: 1em 6em;
+  margin-top: 0.5em;
+  margin-left:3em;
+  display: inline-block;
+}
+
+#newTodo input {
+  border: 1px solid rgb(189, 195, 199);
+  padding: 1em;
+  width: 74%;
+}
+
+#title-field { margin-left: 4em;  }
+
 
 #titleNew, #descrNew, #statusNew {
   display: block;
   margin: 1em;
   padding: 0.5em 0;
+}
+
+footer p {
+  text-align: center;
+  padding: 1em;
+  margin-top: 2.5em;
+}
+
+footer a {
+  color: rgb(236, 100, 75);
 }

@@ -64,6 +64,14 @@ var inputtoP = function (item) {
   });
 };
 
+
+$('.btn').on('click', function(){
+  //Show modal window
+  $('#newTodo').show("fast");
+
+});
+
+
 $('.btn-orange').on('click', function(){
   var newTitle = $('#title-field').val();
   var newDescription = $('#descr-field').val();
@@ -72,8 +80,8 @@ $('.btn-orange').on('click', function(){
     url: "http://localhost:8081/todo",
     method: "POST",
     data: { title: newTitle, description: newDescription, completed: newStatus, created_at: Date },
-    dataType: "html",
-    headers : { 'X-Requested-With': 'XMLHttpRequest'}
+    dataType: "application/json",
+    headers : { "Access-Control-Allow-Headers": "x-requested-with, x-requested-by" }
   });
 
   request.done(function (msg){
