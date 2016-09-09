@@ -50,6 +50,40 @@ h2 {
   margin-bottom: 2em;
 }
 
+#actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  margin: 5em 0px -4em 75em;
+  border: 1px solid rgb(162, 222, 208);
+  padding: 1em 4em;
+  border-radius: 0.5em;
+  background-color: rgb(162, 222, 208);
+  color: #2c2c2c;
+  -webkit-transition: background-color 1s ease-out, border-right: 2s, border-bottom 2s; /*  Older Android browser, chrome, mobile safari, safari & blackberry */
+  -moz-transition: background-color 1s ease-out border-right: 2s, border-bottom 2s; /* Firefox 4 to 15 */
+  -o-transition: background-color 1s ease-out border-right: 2s, border-bottom 2s; /* Opera */
+  transition: background-color 1s ease-out border-right: 2s, border-bottom 2s;
+}
+
+.btn:hover {
+  background-color: rgb(104, 195, 163);
+}
+
+.btn:active {
+  background-color: rgb(162,222, 208);
+  border-right: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+.btn-orange {
+  background-color: rgba(236, 100, 75, 0.7);
+  
+}
+
 #todos {
   height: calc(100vh - 30px);
   border: 1px solid rgb(189, 195, 199);
@@ -94,8 +128,31 @@ h2 {
   display: none;
 }
 
+
 #titles { width: 30%; }
 
 #descriptions { width: 50%; }
 
 #completeds { width: 20%; }
+
+
+#newTodo {
+  background-color: rgba(162, 222, 208, .9);
+  border-radius: 25px;
+  border: 4px solid #fff;
+  display: flex;
+  position: absolute;
+  width: 60%;
+  height: 70%;
+  top: 15%;
+  left: 20%;
+  font-size: 1.25em;
+  align-items: center;
+  justify-content: center;
+}
+
+#titleNew, #descrNew, #statusNew {
+  display: block;
+  margin: 1em;
+  padding: 0.5em 0;
+}

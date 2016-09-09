@@ -20,6 +20,9 @@
         <h1>To.Do.</h1>
         <p class="intro" contenteditable="false">Create simple to-do lists. Get started now. </p>
       </header>
+      <div id="actions">
+        <button class="btn" type="button"><strong>to.do +</strong></button>
+      </div>
       <div class="todoWrapper">
         <div id="todos">
           <div id="ids">
@@ -36,9 +39,29 @@
           </div>
         </div>
       </div>
+
+      <div id = "newTodo">
+        <form>
+          <h2>New To.Do. item</h2>
+          <div id="titleNew">
+            <label id="title-lb">Title</label>
+            <input id="title-field" type="text"/>
+          </div>
+          <div id="descrNew">
+            <label id="descr-lb">Description</label>
+            <input id="descr-field" type="text"/>
+          </div>
+          <div id="statusNew">
+            <label id="status-lb">Completed</label>
+            <input id="status-field" value="false"/>
+          </div>
+          <button class="btn-orange" type="button">Submit</button>
+       </form>
+      </div>
     </div>
 
     <script src="scripts.js"></script>
+    <script src="otherScript.js"></script>
 
   </body>
 </html>

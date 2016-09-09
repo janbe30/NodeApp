@@ -1,3 +1,11 @@
+/* Automatically enable cross-domain requests when needed */
+$.ajaxPrefilter( function (options){
+  if (options.crossDomain && jQuery.support.cors) {
+    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+  }
+});
+
 
 /* Initial function that grabs data from todo.json file */
 $(function(){
@@ -19,7 +27,6 @@ var handleClick = function(){
       listenEnter();
 };
 
-/* Function converts <input> to <p> after user updates item and presses Enter */
 var listenEnter = function(){
   $('#todos input').keyup(function (event){
     var currentItem = this;
@@ -32,19 +39,48 @@ var listenEnter = function(){
   });
 };
 
+/* Function converts <input> to <p> after user updates item and presses Enter */
 var inputtoP = function (item) {
   //console.log($(item).val());
   var newHTML = "<p>" + $(item).val() + "</p>";
   $(item).replaceWith(newHTML);
+  //console.log($(newHTML).text());
 
+  //Make PUT request to server
+  var data = $(newHTML).text();
+  var request = $.ajax({
+      url: "http://localhost:8081/todo/1",
+      method: "PUT",
+      data: { title: data },
+      dataType: "html",
+  });
+
+  request.done(function (msg){
+    console.log("Success");
+  });
+
+  request.fail(function (jqXHR, textStatus){
+    console.log("Request failed!!" + textStatus);
+  });
 };
 
-
-$.ajax({
-  method: "PUT",
-  url: "/home/janbe30/Documents/learnJS/node-app/todo.json",
-  data: { name: "John", location: "Boston" }
-})
-  .done(function( msg ) {
-    alert( "Data Saved: " + msg );
+$('.btn-orange').on('click', function(){
+  var newTitle = $('#title-field').val();
+  var newDescription = $('#descr-field').val();
+  var newStatus = $('#status-field').val();
+  var request = $.ajax({
+    url: "http://localhost:8081/todo",
+    method: "POST",
+    data: { title: newTitle, description: newDescription, completed: newStatus, created_at: Date },
+    dataType: "html",
+    headers : { 'X-Requested-With': 'XMLHttpRequest'}
   });
+
+  request.done(function (msg){
+    console.log("Success");
+  });
+
+  request.fail(function (jqXHR, textStatus){
+    console.log("Request failed!!" + textStatus);
+  });
+});
