@@ -1,12 +1,3 @@
-/* Automatically enable cross-domain requests when needed */
-$.ajaxPrefilter( function (options){
-  if (options.crossDomain && jQuery.support.cors) {
-    var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-  }
-});
-
-
 /* Initial function that grabs data from todo.json file */
 $(function(){
   $.getJSON('/home/janbe30/Documents/learnJS/node-app/todo.json', function(data){
@@ -77,11 +68,19 @@ $('.btn-orange').on('click', function(){
   var newDescription = $('#descr-field').val();
   var newStatus = $('#status-field').val();
   var request = $.ajax({
+    type: "POST",
     url: "http://localhost:8081/todo",
-    method: "POST",
-    data: { title: newTitle, description: newDescription, completed: newStatus, created_at: Date },
-    dataType: "application/json",
-    headers : { "Access-Control-Allow-Headers": "x-requested-with, x-requested-by" }
+    data: JSON.stringify({
+      id: nextId,
+      title: newTitle,
+      description: newDescription,
+      completed: newStatus
+    }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    hsuccess: function (data, status){
+      console.log("Success", status, data);
+    }
   });
 
   request.done(function (msg){
