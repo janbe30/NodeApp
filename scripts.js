@@ -1,14 +1,21 @@
+//Try grabbing the last element in id div instead of adding class
+//Use same logic to do updates
+
+
+var nextId;
+
 /* Initial function that grabs data from todo.json file */
 $(function(){
   $.getJSON('/home/janbe30/Documents/learnJS/node-app/todo.json', function(data){
     $.each(data, function(i, f){
-      $("<p>" + f.id + "</p>").appendTo("#todos #ids");
+      $("<p>" + f.id + "</p>").appendTo("#todos #ids").addClass("lastId");
       $("<p>" + f.title + "</p>").appendTo("#todos #titles").on('click', handleClick);
       $("<p>" + f.description + "</p>").appendTo("#todos #descriptions").on('click', handleClick);
       $("<p>" + f.completed + "</p>").appendTo("#todos #completeds").on('click', handleClick);
     });
   });
 });
+
 
 /* Function that turns each item <p> to <input> when user clicks on it */
 var handleClick = function(){
@@ -30,44 +37,52 @@ var listenEnter = function(){
   });
 };
 
-/* Function converts <input> to <p> after user updates item and presses Enter */
+/* Function converts <input> to <p> after user updates item and presses Enter
+  Call to server to update item
+*/
 var inputtoP = function (item) {
-  //console.log($(item).val());
+  console.log($(item).val());
   var newHTML = "<p>" + $(item).val() + "</p>";
   $(item).replaceWith(newHTML);
   //console.log($(newHTML).text());
-
+  console.log($(newHTML).closest("div").prop("id"); //Getting undefined
   //Make PUT request to server
   var data = $(newHTML).text();
-  var request = $.ajax({
+  console.log(data);
+
+  $.ajax({
+      type: "PUT",
       url: "http://localhost:8081/todo/1",
-      method: "PUT",
-      data: { title: data },
-      dataType: "html",
+      data: JSON.stringify({ title: data }),
+      /*
+        data: function(){
+           if( parent.id == "titles") then JSON.stringify({title:data})
+           else if ( parent.id == "descriptions" then JSON.stringify({description: data}))
+           else completed: data;
+      }
+      */
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (data, status){
+        console.log("Success", status,data);
+      }
   });
 
-  request.done(function (msg){
-    console.log("Success");
-  });
-
-  request.fail(function (jqXHR, textStatus){
-    console.log("Request failed!!" + textStatus);
-  });
 };
 
-
+/*Show modal window*/
 $('.btn').on('click', function(){
-  //Show modal window
   $('#newTodo').show("fast");
-
 });
 
-
+/* Function adds new item to list */
 $('.btn-orange').on('click', function(){
+  //console.log($('.lastId').last().text());
+  nextId = parseInt($('.lastId').last().text())+1;
   var newTitle = $('#title-field').val();
   var newDescription = $('#descr-field').val();
   var newStatus = $('#status-field').val();
-  var request = $.ajax({
+   $.ajax({
     type: "POST",
     url: "http://localhost:8081/todo",
     data: JSON.stringify({
@@ -78,16 +93,12 @@ $('.btn-orange').on('click', function(){
     }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
-    hsuccess: function (data, status){
+    success: function (data, status){
       console.log("Success", status, data);
+      location.reload();
+      nextId = nextId+1;
+
     }
   });
 
-  request.done(function (msg){
-    console.log("Success");
-  });
-
-  request.fail(function (jqXHR, textStatus){
-    console.log("Request failed!!" + textStatus);
-  });
 });
