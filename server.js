@@ -12,7 +12,6 @@ var server = app.listen(8081, function() {
   console.log("Example app listening at http://%s:%s", host, port)
 })
 
-
 app.all('*', function(req, res, next) {
  res.header('Access-Control-Allow-Origin', '*'); //This is the important one
  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -20,7 +19,9 @@ app.all('*', function(req, res, next) {
  next();
 });
 
+
 // GET, POST, PUT/PATCH, DELETE - Basic API commands
+
 
 //localhost:8081/todo
 //Retrieve entire database
